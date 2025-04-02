@@ -77,7 +77,18 @@ void display(Process *p, int n, int show_priority) {
 void fcfs(Process *p, int n) {
     input(p, n);
     
-    // Sort processes by arrival time (assuming they're already sorted)
+    // Sort processes by arrival time
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (p[j].arrival > p[j+1].arrival) {
+                // Swap processes
+                Process temp = p[j];
+                p[j] = p[j+1];
+                p[j+1] = temp;
+            }
+        }
+    }
+    
     int time = 0;
     
     for (int i = 0; i < n; i++) {
